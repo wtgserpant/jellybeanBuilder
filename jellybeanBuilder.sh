@@ -3,7 +3,7 @@
 WORKDIR=~/development/androidJB
 OUTDIR=~/development/out
 
-###Update script###
+## Update script ##
 SCRIPTDIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $SCRIPTDIR
 echo -e "\nSyncing script...\n"
@@ -18,11 +18,11 @@ let WORKERS=$CPU+1
 
 echo -e "\n ::: SAMSUNG GALAXY TAB 10.1 - ANDROID 4.1.1 'JELLY BEAN' BUILDER SCRIPT ::: \n"
 
-##Definition of the working directory and device models
+## Definition of the working directory and device models ##
 TARGET=(p4 p4wifi)
 MODELS=(GT-P7500 GT-P7510)
 
-##Device selection menu
+## Device selection menu ##
 echo -e "\n Select your device:"
 echo -e "\n [1] 10.1 3G (GT-P7500)"
 echo -e "\n [2] 10.1 Wi-Fi only (GT-P7510)"
@@ -55,7 +55,7 @@ fi
 
 cp $SCRIPTDIR/cfgFiles/local_manifest.xml $WORKDIR/.repo/
 
-#Confirm repo update
+## Confirm repo update ##
 echo -e "\n"
 read -s -p "Sync repo now? (If this is the first sync, it will download around 9GiB) [Y/n]" -n 1 REPOUPDATE
 if [[ $REPOUPDATE =~ ^[Yy]$ ]]; then
@@ -63,7 +63,12 @@ if [[ $REPOUPDATE =~ ^[Yy]$ ]]; then
     repo sync -j16
 fi
 
-#. build/envsetup.sh  > /dev/null 2>&1
-#croot > /dev/null 2>&1
-#echo -e "\n"
-#lunch
+## Initialize specific variables for build ##
+. build/envsetup.sh  > /dev/null 2>&1
+croot > /dev/null 2>&1
+echo -e "\n"
+lunch full_${TARGET[$OPTION]}-userdebug
+
+## Java exports, this can be adjusted to fit the system ##
+export JAVA_HOME=~/development/jdk1.6.0_27
+export PATH=$PATH:~/development/jdk1.6.0_27/bin
