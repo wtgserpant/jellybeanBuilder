@@ -66,8 +66,8 @@ if [[ $REPOUPDATE =~ ^[Yy]$ ]]; then
 fi
 
 ## Compile kernel every time a build is made ##
-if [ -f $OUTDIR/$TARGET/obj/KERNEL_OBJ/.version ]; then
-   rm $OUTDIR/$TARGET/obj/KERNEL_OBJ/.version
+if [ -f $OUTDIR/${TARGET[$OPTION]}/obj/KERNEL_OBJ/.version ]; then
+   rm $OUTDIR/${TARGET[$OPTION]}/obj/KERNEL_OBJ/.version
 fi
 
 ## Initialize specific variables for build ##
