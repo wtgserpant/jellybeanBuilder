@@ -55,7 +55,7 @@ fi
 
 ## Copy modified files ##
 cp $SCRIPTDIR/cfgFiles/local_manifest.xml $WORKDIR/.repo/
-#cp $SCRIPTDIR/cfgFiles/kernel.mk  $WORKDIR/build/core/tasks/
+cp $SCRIPTDIR/cfgFiles/kernel.mk  $WORKDIR/build/core/tasks/
 
 ## Confirm repo update ##
 echo -e "\n"
@@ -63,6 +63,11 @@ read -s -p "Sync repo now? (If this is the first sync, it will download around 9
 if [[ $REPOUPDATE =~ ^[Yy]$ ]]; then
     echo -e "\n\nSyncing repos...\n"
     repo sync -j16
+fi
+
+## Compile kernel every time a build is made ##
+if [ -f $OUTDIR/$TARGET/obj/KERNEL_OBJ/.version ]; then
+   rm $OUTDIR/$TARGET/obj/KERNEL_OBJ/.version
 fi
 
 ## Initialize specific variables for build ##
