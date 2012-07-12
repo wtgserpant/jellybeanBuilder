@@ -93,7 +93,7 @@ read -s -p "Do you want to make a clean build? [y/N]" -n 1 MKCLEAN
 if [[ $MKCLEAN =~ ^[Yy]$ ]]; then make clean > /dev/null 2>&1; fi
 
 echo -e "\n\nStarting compilation (this will take a considerable amount of time) ...\n"
-time make -j$WORKERS 2>/tmp/JBROMerrors.log
+time make -j$WORKERS otapackage 2>/tmp/JBROMerrors.log
 
 if [ $? -ne 0 ]; then
     beep -r 3
