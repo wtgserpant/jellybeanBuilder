@@ -10,6 +10,12 @@ REPO=$WORKDIR/repo
 CPU=`grep -e 'processor' /proc/cpuinfo | wc -l`
 let WORKERS=$CPU+1
 
+###Update script###
+SCRIPTDIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR
+echo -e "\nSyncing script...\n"
+git pull
+
 echo -e "\n ::: SAMSUNG GALAXY TAB 10.1 - ANDROID 4.1.1 'JELLY BEAN' BUILDER SCRIPT ::: \n"
 
 ##Definition of the working directory and device models
@@ -54,6 +60,7 @@ if [[ $REPOUPDATE =~ ^[Yy]$ ]]; then
     echo -e "\n\nSyncing repos...\n"
     repo sync -j16
 fi
+
 
 #. build/envsetup.sh  > /dev/null 2>&1
 #croot > /dev/null 2>&1
