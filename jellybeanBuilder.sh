@@ -53,9 +53,9 @@ if [ ! "$(cat $WORKDIR/.repo/manifests.git/FETCH_HEAD | grep android-4.1.1_r1)" 
     repo init -b android-4.1.1_r1
 fi
 
-## ##
+## Copy modified files ##
 cp $SCRIPTDIR/cfgFiles/local_manifest.xml $WORKDIR/.repo/
-cp $SCRIPTDIR/cfgFiles/kernel.mk  $WORKDIR/build/core/tasks/
+#cp $SCRIPTDIR/cfgFiles/kernel.mk  $WORKDIR/build/core/tasks/
 
 ## Confirm repo update ##
 echo -e "\n"
