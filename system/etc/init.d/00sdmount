@@ -1,0 +1,3 @@
+#!/system/bin/sh
+mount -o bind,rw /data/media /sdcard
+chmod -R 777 /mnt/sdcard/
