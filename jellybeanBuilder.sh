@@ -57,6 +57,7 @@ fi
 cp $SCRIPTDIR/cfgFiles/local_manifest.xml $WORKDIR/.repo/
 cp $SCRIPTDIR/cfgFiles/kernel.mk  $WORKDIR/build/core/tasks/
 cp $SCRIPTDIR/cfgFiles/init.rc $WORKDIR/system/core/rootdir/
+sed -i 's/CONFIG_SEC_KEYBOARD_DOCK=y/CONFIG_SEC_KEYBOARD_DOCK=n/' $WORKDIR/kernel/samsung/arch/arm/configs/pershoot_samsung_${TARGET[$OPTION]}-ics_defconfig
 
 ## Confirm repo update ##
 echo -e "\n"
@@ -119,7 +120,7 @@ mkdir -p $OUTDIR/{lastbuild,oldbuilds}/${TARGET[$OPTION]}
 
 ## Move the last build to oldbuilds ##
 if [ -f  $OUTDIR/lastbuild/${TARGET[$OPTION]}/*.zip ]; then
-    mv $OUTDIR/lastbuild/${TARGET[$OPTION]}/*.zip $OUTDIR/oldbuilds/${TARGET[$OPTION]}/
+    mv $OUTDIR/lastbuild/${TARGET[$OPTION]}/*.zip $OUTDIR/oldbuilds/${TARGET[$OPTION]}
 fi
 
 ## Copy raw ROM ##
@@ -141,7 +142,7 @@ echo -e "\nSigning ROM...\n"
 java -Xmx2048m -jar $WORKDIR/out/host/linux-x86/framework/signapk.jar -w $WORKDIR/build/target/product/security/testkey.x509.pem $WORKDIR/build/target/product/security/testkey.pk8 $TODAY-$VERSION-${TARGET[$OPTION]}.zip $TODAY-$VERSION-${TARGET[$OPTION]}-sig.zip
 
 ## Move final ROM ##
-mv $OUTDIR/tmp/$TODAY-$VERSION-${TARGET[$OPTION]}-sig.zip $OUTDIR/lastbuild/${TARGET[$OPTION]}/
+mv $OUTDIR/tmp/$TODAY-$VERSION-${TARGET[$OPTION]}-sig.zip $OUTDIR/lastbuild/${TARGET[$OPTION]}
 
 ## Clean tmp directory ##
 rm -rf $OUTDIR/tmp/*
