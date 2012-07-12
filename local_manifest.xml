@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <remote  name="github"
+           fetch="git://github.com/" />
+
+  <project name="pershoot/galaxy-2636" path="kernel/samsung" remote="github" revision="ics" />
+  <project name="pershoot/android_vendor_samsung_p4" path="vendor/samsung/p4" remote="github" revision="ics"/>
+  <project name="pershoot/android_vendor_samsung_p4wifi" path="vendor/samsung/p4wifi" remote="github" revision="ics" />
+  <project name="maplesci/android_device_samsung_p4" path="device/samsung/p4" remote="github" revision="ics" />
+  <project name="maplesci/android_device_samsung_p4wifi" path="device/samsung/p4wifi" remote="github" revision="ics" />
+
+</manifest>
