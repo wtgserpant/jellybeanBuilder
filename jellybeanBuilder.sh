@@ -53,7 +53,7 @@ if [ ! "$(cat $WORKDIR/.repo/manifests.git/FETCH_HEAD | grep android-4.1.1_r1)" 
     repo init -b android-4.1.1_r1
 fi
 
-cp $SCRIPTDIR/local_manifest.xml $WORKDIR/.repo/
+cp $SCRIPTDIR/cfgFiles/local_manifest.xml $WORKDIR/.repo/
 
 #Confirm repo update
 echo -e "\n"
@@ -62,7 +62,6 @@ if [[ $REPOUPDATE =~ ^[Yy]$ ]]; then
     echo -e "\n\nSyncing repos...\n"
     repo sync -j16
 fi
-
 
 #. build/envsetup.sh  > /dev/null 2>&1
 #croot > /dev/null 2>&1
