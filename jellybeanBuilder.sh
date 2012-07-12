@@ -53,7 +53,9 @@ if [ ! "$(cat $WORKDIR/.repo/manifests.git/FETCH_HEAD | grep android-4.1.1_r1)" 
     repo init -b android-4.1.1_r1
 fi
 
+## ##
 cp $SCRIPTDIR/cfgFiles/local_manifest.xml $WORKDIR/.repo/
+cp $SCRIPTDIR/cfgFiles/kernel.mk  $WORKDIR/build/core/tasks/
 
 ## Confirm repo update ##
 echo -e "\n"
@@ -72,3 +74,33 @@ lunch full_${TARGET[$OPTION]}-userdebug
 ## Java exports, this can be adjusted to fit the system ##
 export JAVA_HOME=~/development/jdk1.6.0_27
 export PATH=$PATH:~/development/jdk1.6.0_27/bin
+
+## Confirm compilation ##
+read -s -p "Compile now? [Y/n]" -n 1 COMPNOW
+if [[ ! $COMPNOW =~ ^[Yy]$ ]]; then
+   echo -e "\n"
+   exit 0
+fi
+echo -e "\n"
+
+## Start build ##
+read -s -p "Do you want to make a clean build? [y/N]" -n 1 MKCLEAN
+if [[ $MKCLEAN =~ ^[Yy]$ ]]; then make clean > /dev/null 2>&1; fi
+
+echo -e "\n\nStarting compilation (this will take a considerable amount of time) ...\n"
+time make -j$WORKERS 2>/tmp/JBROMerrors.log
+
+if [ $? -ne 0 ]; then
+    beep -r 3
+    echo -e "\nCompilation failed\n"
+    read -s -p "Would you like to see the error log? [n/Y]" -n 1 ERROR
+    if [[ $ERROR =~ ^[Yy]$ ]]; then
+	echo -e "\n"
+	cat /tmp/JBROMerrors.log | grep -v warning
+	exit 0
+    fi
+    exit 1
+fi
+
+echo -e "\nCompilation succeeded\n"
+beep -r 1
