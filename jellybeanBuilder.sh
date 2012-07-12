@@ -63,10 +63,10 @@ sed -i 's/CONFIG_SEC_KEYBOARD_DOCK=y/CONFIG_SEC_KEYBOARD_DOCK=n/' $WORKDIR/kerne
 echo -e "\n"
 read -s -p "Sync repo now? (If this is the first sync, it will download around 9GiB) [Y/n]" -n 1 REPOUPDATE
 if [[ $REPOUPDATE =~ ^[Yy]$ ]]; then
-    echo -e "\n\nSyncing repos...\n"
+    echo -e "\n\nSyncing repos..."
     repo sync -j16
 fi
-
+echo -e "\n\n"
 ## Confirm compilation ##
 read -s -p "Compile now? [Y/n]" -n 1 COMPNOW
 if [[ ! $COMPNOW =~ ^[Yy]$ ]]; then
@@ -95,18 +95,18 @@ read -s -p "Do you want to make a clean build? [y/N]" -n 1 MKCLEAN
 if [[ $MKCLEAN =~ ^[Yy]$ ]]; then make clean > /dev/null 2>&1; fi
 
 echo -e "\n\nStarting compilation (this will take a considerable amount of time) ...\n"
-time make -j$WORKERS otapackage 2>/tmp/JBROMerrors.log
+time make -j$WORKERS otapackage
 
 if [ $? -ne 0 ]; then
     beep -r 3
     echo -e "\nCompilation failed\n"
-    read -s -p "Would you like to see the error log? [n/Y]" -n 1 ERROR
-    if [[ $ERROR =~ ^[Yy]$ ]]; then
-	echo -e "\n"
-	cat /tmp/JBROMerrors.log | grep -v warning
-	exit 0
-    fi
-    exit 1
+#    read -s -p "Would you like to see the error log? [n/Y]" -n 1 ERROR
+#    if [[ $ERROR =~ ^[Yy]$ ]]; then
+#	echo -e "\n"
+#	cat /tmp/JBROMerrors.log | grep -v warning
+#	exit 0
+#    fi
+#    exit 1
 fi
 
 echo -e "\nCompilation succeeded\n"
