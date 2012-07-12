@@ -3,18 +3,18 @@
 WORKDIR=~/development/androidJB
 OUTDIR=~/development/out
 
+###Update script###
+SCRIPTDIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR
+echo -e "\nSyncing script...\n"
+git pull
+
 mkdir -p $WORKDIR
 mkdir -p $OUTDIR
 cd $WORKDIR
 REPO=$WORKDIR/repo
 CPU=`grep -e 'processor' /proc/cpuinfo | wc -l`
 let WORKERS=$CPU+1
-
-###Update script###
-SCRIPTDIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd $SCRIPTDIR
-echo -e "\nSyncing script...\n"
-git pull
 
 echo -e "\n ::: SAMSUNG GALAXY TAB 10.1 - ANDROID 4.1.1 'JELLY BEAN' BUILDER SCRIPT ::: \n"
 
