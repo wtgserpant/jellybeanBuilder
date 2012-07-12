@@ -2,6 +2,7 @@
 ## Set your work and out directories ##
 WORKDIR=~/development/androidJB
 OUTDIR=~/development/out
+VERSION=jellybean-alpha
 
 ## Update script ##
 SCRIPTDIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -10,7 +11,6 @@ echo -e "\nSyncing script...\n"
 git pull
 
 mkdir -p $WORKDIR
-mkdir -p $OUTDIR
 cd $WORKDIR
 REPO=$WORKDIR/repo
 CPU=`grep -e 'processor' /proc/cpuinfo | wc -l`
@@ -56,6 +56,7 @@ fi
 ## Copy modified files ##
 cp $SCRIPTDIR/cfgFiles/local_manifest.xml $WORKDIR/.repo/
 cp $SCRIPTDIR/cfgFiles/kernel.mk  $WORKDIR/build/core/tasks/
+cp $SCRIPTDIR/cfgFiles/init.rc $WORKDIR/system/core/rootdir/
 
 ## Confirm repo update ##
 echo -e "\n"
@@ -64,6 +65,14 @@ if [[ $REPOUPDATE =~ ^[Yy]$ ]]; then
     echo -e "\n\nSyncing repos...\n"
     repo sync -j16
 fi
+
+## Confirm compilation ##
+read -s -p "Compile now? [Y/n]" -n 1 COMPNOW
+if [[ ! $COMPNOW =~ ^[Yy]$ ]]; then
+   echo -e "\n"
+   exit 0
+fi
+echo -e "\n"
 
 ## Compile kernel every time a build is made ##
 if [ -f $OUTDIR/${TARGET[$OPTION]}/obj/KERNEL_OBJ/.version ]; then
@@ -79,14 +88,6 @@ lunch full_${TARGET[$OPTION]}-userdebug
 ## Java exports, this can be adjusted to fit the system ##
 export JAVA_HOME=~/development/jdk1.6.0_27
 export PATH=$PATH:~/development/jdk1.6.0_27/bin
-
-## Confirm compilation ##
-read -s -p "Compile now? [Y/n]" -n 1 COMPNOW
-if [[ ! $COMPNOW =~ ^[Yy]$ ]]; then
-   echo -e "\n"
-   exit 0
-fi
-echo -e "\n"
 
 ## Start build ##
 read -s -p "Do you want to make a clean build? [y/N]" -n 1 MKCLEAN
@@ -109,3 +110,41 @@ fi
 
 echo -e "\nCompilation succeeded\n"
 beep -r 1
+
+## Prepare ROM ##
+echo -e "\nPreparing ROM...\n"
+TODAY=$(date +"%d-%m-%y.%H-%M")
+mkdir -p $OUTDIR/tmp
+mkdir -p $OUTDIR/{lastbuild,oldbuilds}/${TARGET[$OPTION]}
+
+## Move the last build to oldbuilds ##
+if [ -f  $OUTDIR/lastbuild/${TARGET[$OPTION]}/*.zip ]; then
+    mv $OUTDIR/lastbuild/${TARGET[$OPTION]}/*.zip $OUTDIR/oldbuilds/${TARGET[$OPTION]}/
+fi
+
+## Copy raw ROM ##
+cp $WORKDIR/out/target/product/${TARGET[$OPTION]}/*.zip $OUTDIR/
+
+## Unzip and mod files to get final ROM
+cd $OUTDIR
+unzip -q *.zip -d tmp/
+rm *.zip
+rm -rf tmp/recovery
+cp $SCRIPTDIR/cfgFiles/updater-script tmp/META-INF/com/google/android/
+sed -i s/p4wifi/"${TARGET[$OPTION]}"/ tmp/META-INF/com/google/android/updater-script
+cp $SCRIPTDIR/system/ tmp/ -r
+cd tmp
+zip -qr $TODAY-$VERSION-${TARGET[$OPTION]}.zip *
+
+## Sign final ROM ##
+echo -e "\nSigning ROM...\n"
+java -Xmx2048m -jar $WORKDIR/out/host/linux-x86/framework/signapk.jar -w $WORKDIR/build/target/product/security/testkey.x509.pem $WORKDIR/build/target/product/security/testkey.pk8 $TODAY-$VERSION-${TARGET[$OPTION]}.zip $TODAY-$VERSION-${TARGET[$OPTION]}-sig.zip
+
+## Move final ROM ##
+mv $OUTDIR/tmp/$TODAY-$VERSION-${TARGET[$OPTION]}-sig.zip $OUTDIR/lastbuild/${TARGET[$OPTION]}/
+
+## Clean tmp directory ##
+rm -rf $OUTDIR/tmp/*
+
+## echo the location of the final ROM ##
+echo -e "\nROM ready at $OUTDIR/lastbuild/${TARGET[$OPTION]}/$TODAY-$VERSION-${TARGET[$OPTION]}-sig.zip\n\n"
