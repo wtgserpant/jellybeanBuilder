@@ -75,6 +75,10 @@ if [[ ! $COMPNOW =~ ^[Yy]$ ]]; then
 fi
 echo -e "\n"
 
+## Clean build ##
+read -s -p "Do you want to make a clean build? [y/N]" -n 1 MKCLEAN
+if [[ $MKCLEAN =~ ^[Yy]$ ]]; then make clean > /dev/null 2>&1; fi
+
 ## Compile kernel every time a build is made ##
 if [ -f $OUTDIR/${TARGET[$OPTION]}/obj/KERNEL_OBJ/.version ]; then
    rm $OUTDIR/${TARGET[$OPTION]}/obj/KERNEL_OBJ/.version
@@ -91,8 +95,6 @@ export JAVA_HOME=~/development/jdk1.6.0_27
 export PATH=$PATH:~/development/jdk1.6.0_27/bin
 
 ## Start build ##
-read -s -p "Do you want to make a clean build? [y/N]" -n 1 MKCLEAN
-if [[ $MKCLEAN =~ ^[Yy]$ ]]; then make clean > /dev/null 2>&1; fi
 
 echo -e "\n\nStarting compilation (this will take a considerable amount of time) ...\n"
 time make -j$WORKERS otapackage
