@@ -53,6 +53,8 @@ if [ ! "$(cat $WORKDIR/.repo/manifests.git/FETCH_HEAD | grep android-4.1.1_r1)" 
     repo init -b android-4.1.1_r1
 fi
 
+cp $SCRIPTDIR/local_manifest.xml $WORKDIR/.repo/
+
 #Confirm repo update
 echo -e "\n"
 read -s -p "Sync repo now? (If this is the first sync, it will download around 9GiB) [Y/n]" -n 1 REPOUPDATE
