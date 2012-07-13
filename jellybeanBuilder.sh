@@ -97,18 +97,18 @@ export PATH=$PATH:~/development/jdk1.6.0_27/bin
 ## Start build ##
 
 echo -e "\n\nStarting compilation (this will take a considerable amount of time) ...\n"
-time make -j$WORKERS otapackage
+time make -j$WORKERS otapackage 2>/tmp/JBROMerror.log
 
 if [ $? -ne 0 ]; then
     beep -r 3
     echo -e "\nCompilation failed\n"
-#    read -s -p "Would you like to see the error log? [n/Y]" -n 1 ERROR
-#    if [[ $ERROR =~ ^[Yy]$ ]]; then
-#	echo -e "\n"
-#	cat /tmp/JBROMerrors.log | grep -v warning
-#	exit 0
-#    fi
-#    exit 1
+    read -s -p "Would you like to see the error log? [n/Y]" -n 1 ERROR
+    if [[ $ERROR =~ ^[Yy]$ ]]; then
+	echo -e "\n"
+	cat /tmp/JBROMerrors.log | grep -v warning
+	exit 0
+    fi
+    exit 1
 fi
 
 echo -e "\nCompilation succeeded\n"
