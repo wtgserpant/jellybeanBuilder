@@ -9,5 +9,6 @@
   <project name="maplesci/android_device_samsung_p4" path="device/samsung/p4" remote="github" revision="ics" />
   <project name="maplesci/android_device_samsung_p4wifi" path="device/samsung/p4wifi" remote="github" revision="ics" />
   <project name="maplesci/android_device_samsung_p4-common" path="device/samsung/p4-common" remote="github" revision="ics" />
+  <!-- <project name="TeamWin/Team-Win-Recovery-Project" path="bootable/recovery" remote="github" revision="master" /> -->
 
 </manifest>

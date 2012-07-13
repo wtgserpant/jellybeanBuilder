@@ -57,7 +57,7 @@ fi
 cp $SCRIPTDIR/cfgFiles/local_manifest.xml $WORKDIR/.repo/
 cp $SCRIPTDIR/cfgFiles/kernel.mk  $WORKDIR/build/core/tasks/
 cp $SCRIPTDIR/cfgFiles/init.rc $WORKDIR/system/core/rootdir/
-sed -i 's/CONFIG_SEC_KEYBOARD_DOCK=y/CONFIG_SEC_KEYBOARD_DOCK=n/' $WORKDIR/kernel/samsung/arch/arm/configs/pershoot_samsung_${TARGET[$OPTION]}-ics_defconfig
+sed -i 's/CONFIG_SEC_KEYBOARD_DOCK=n/CONFIG_SEC_KEYBOARD_DOCK=y/' $WORKDIR/kernel/samsung/arch/arm/configs/pershoot_samsung_${TARGET[$OPTION]}-ics_defconfig
 
 ## Confirm repo update ##
 echo -e "\n"
