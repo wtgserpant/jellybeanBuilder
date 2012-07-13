@@ -80,8 +80,8 @@ read -s -p "Do you want to make a clean build? [y/N]" -n 1 MKCLEAN
 if [[ $MKCLEAN =~ ^[Yy]$ ]]; then make clean > /dev/null 2>&1; fi
 
 ## Compile kernel every time a build is made ##
-if [ -f $OUTDIR/${TARGET[$OPTION]}/obj/KERNEL_OBJ/.version ]; then
-   rm $OUTDIR/${TARGET[$OPTION]}/obj/KERNEL_OBJ/.version
+if [ -f $WORKDIR/out/target/product/${TARGET[$OPTION]}/obj/KERNEL_OBJ/.version ]; then
+   rm $WORKDIR/out/target/product/${TARGET[$OPTION]}/obj/KERNEL_OBJ/.version
 fi
 
 ## Initialize specific variables for build ##
