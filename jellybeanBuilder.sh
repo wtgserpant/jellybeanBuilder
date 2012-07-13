@@ -19,13 +19,14 @@ let WORKERS=$CPU+1
 echo -e "\n ::: SAMSUNG GALAXY TAB 10.1 - ANDROID 4.1.1 'JELLY BEAN' BUILDER SCRIPT ::: \n"
 
 ## Definition of the working directory and device models ##
-TARGET=(p4 p4wifi)
+TARGET=(p4 p4wifi p4vzw)
 MODELS=(GT-P7500 GT-P7510)
 
 ## Device selection menu ##
 echo -e "\n Select your device:"
 echo -e "\n [1] 10.1 3G (GT-P7500)"
 echo -e "\n [2] 10.1 Wi-Fi only (GT-P7510)"
+echo -e "\n [3] 10.1 Verizon 4G LTE (SCH-I905)"
 
 read -s -p "" -n 1 OPTION
 
