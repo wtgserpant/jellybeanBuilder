@@ -105,7 +105,7 @@ if [ $? -ne 0 ]; then
     read -s -p "Would you like to see the error log? [n/Y]" -n 1 ERROR
     if [[ $ERROR =~ ^[Yy]$ ]]; then
 	echo -e "\n"
-	cat /tmp/JBROMerrors.log | grep -v warning
+	cat /tmp/JBROMerror.log | grep -v warning
 	exit 0
     fi
     exit 1
