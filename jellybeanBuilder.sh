@@ -20,7 +20,7 @@ echo -e "\n ::: SAMSUNG GALAXY TAB 10.1 - ANDROID 4.1.1 'JELLY BEAN' BUILDER SCR
 
 ## Definition of the working directory and device models ##
 TARGET=(p4 p4wifi p4vzw)
-MODELS=(GT-P7500 GT-P7510)
+MODELS=(GT-P7500 GT-P7510 SCH-I905)
 
 ## Device selection menu ##
 echo -e "\n Select your device:"
