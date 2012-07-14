@@ -30,7 +30,7 @@ echo -e "\n [3] 10.1 Verizon 4G LTE (SCH-I905)"
 
 read -s -p "" -n 1 OPTION
 
-if [[ $OPTION =~ [1-2]$ ]]; then
+if [[ $OPTION =~ [1-3]$ ]]; then
    let OPTION=$OPTION-1
    echo -e "\n You selected ${MODELS[$OPTION]}\n"
 else
