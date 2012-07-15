@@ -123,7 +123,6 @@ set_perm(0, 0, 06755, "/system/xbin/su");
 set_perm(0, 0, 06755, "/system/bin/su");
 set_perm(0, 0, 06755, "/system/app/Superuser.apk");
 set_perm(0, 0, 06755, "/system/bin/sdcard");
-set_perm(0, 0, 06755, "/system/etc/init.d/00sdmount");
 show_progress(0.200000, 0);
 show_progress(0.200000, 10);
 package_extract_file("boot.img", "/dev/block/mmcblk0p3");
