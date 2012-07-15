@@ -151,3 +151,13 @@ rm -rf $OUTDIR/tmp/*
 
 ## echo the location of the final ROM ##
 echo -e "\nROM ready at $OUTDIR/lastbuild/${TARGET[$OPTION]}/$TODAY-$VERSION-${TARGET[$OPTION]}-sig.zip\n\n"
+
+## Offer adb transfer. Set your remote (tablet) path ##
+read -s -p "Send to your tablet via adb? [Y/n]" -n 1 ADBT
+if [[ ! $COMPNOW =~ ^[Yy]$ ]]; then
+   echo -e "\n"
+   exit 0
+fi
+
+echo -e "\nTransfering ROM..."
+adb push $OUTDIR/lastbuild/${TARGET[$OPTION]}/$TODAY-$VERSION-${TARGET[$OPTION]}-sig.zip /sdcard/1ROMS/
