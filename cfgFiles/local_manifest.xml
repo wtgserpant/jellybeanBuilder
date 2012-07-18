@@ -11,6 +11,8 @@
   <project name="maplesci/android_device_samsung_p4vzw" path="device/samsung/p4vzw" remote="github" revision="ics" />
   <project name="maplesci/android_device_samsung_p4wifi" path="device/samsung/p4wifi" remote="github" revision="jellybean" />
   <project name="maplesci/android_device_samsung_p4-common" path="device/samsung/p4-common" remote="github" revision="jellybean" />
+  <project name="maplesci/android_frameworks_base" path="frameworks/base" remote="github" revision="jellybean"/>
+  <project name="maplesci/android_packages_apps_Settings" path="packages/apps/Settings" remote="github" revision="jellybean"/>
   <!-- <project name="TeamWin/Team-Win-Recovery-Project" path="bootable/recovery" remote="github" revision="master" /> -->
 
 </manifest>
