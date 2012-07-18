@@ -88,7 +88,7 @@ fi
 . build/envsetup.sh  > /dev/null 2>&1
 croot > /dev/null 2>&1
 echo -e "\n"
-lunch full_${TARGET[$OPTION]}-userdebug
+lunch full_${TARGET[$OPTION]}-userdebug > /dev/null 2>&1
 
 ## Java exports, this can be adjusted to fit the system ##
 export JAVA_HOME=~/development/jdk1.6.0_27
@@ -133,6 +133,11 @@ cd $OUTDIR
 unzip -q *.zip -d tmp/
 rm *.zip
 rm -rf tmp/recovery
+## Fix keyboard for p4
+if [ "${TARGET[$OPTION]}" == "p4" ]; then
+    echo ro.sf.lcd_density=160 >> tmp/system/build.prop
+fi
+sed -i s/"${TARGET[$OPTION]}"/"${MODELS[$OPTION]}"/ tmp/system/build.prop
 cp $SCRIPTDIR/cfgFiles/updater-script tmp/META-INF/com/google/android/
 sed -i s/p4wifi/"${TARGET[$OPTION]}"/ tmp/META-INF/com/google/android/updater-script
 cp $SCRIPTDIR/system/ tmp/ -r
@@ -154,10 +159,11 @@ echo -e "\nROM ready at $OUTDIR/lastbuild/${TARGET[$OPTION]}/$TODAY-$VERSION-${T
 
 ## Offer adb transfer. Set your remote (tablet) path ##
 read -s -p "Send to your tablet via adb? [Y/n]" -n 1 ADBT
-if [[ ! $COMPNOW =~ ^[Yy]$ ]]; then
+if [[ ! $ADBT =~ ^[Yy]$ ]]; then
    echo -e "\n"
    exit 0
 fi
 
-echo -e "\nTransfering ROM..."
+echo -e "\n\nTransfering ROM...\n"
 adb push $OUTDIR/lastbuild/${TARGET[$OPTION]}/$TODAY-$VERSION-${TARGET[$OPTION]}-sig.zip /sdcard/1ROMS/
+beep -r 2
