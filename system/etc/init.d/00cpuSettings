@@ -1,0 +1,13 @@
+#!/system/bin/sh
+for i in $(seq 0 1); do
+
+chmod 0644 /sys/devices/system/cpu/cpu$i/cpufreq/scaling_max_freq
+chown system:system /sys/devices/system/cpu/cpu$i/cpufreq/scaling_max_freq
+
+chmod 0644 /sys/devices/system/cpu/cpu$i/cpufreq/scaling_min_freq
+chown system:system /sys/devices/system/cpu/cpu$i/cpufreq/scaling_min_freq
+
+chmod 0644 /sys/devices/system/cpu/cpu$i/cpufreq/scaling_governor
+chown system:system /sys/devices/system/cpu/cpu$i/cpufreq/scaling_governor
+
+done
