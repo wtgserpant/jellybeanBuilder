@@ -4,11 +4,11 @@
            fetch="git://github.com/" />
 
   <project name="pershoot/galaxy-2636" path="kernel/samsung" remote="github" revision="jellybean" />
-  <project name="pershoot/android_vendor_samsung_p4" path="vendor/samsung/p4" remote="github" revision="ics"/>
+  <project name="pershoot/android_vendor_samsung_p4" path="vendor/samsung/p4" remote="github" revision="jellybean"/>
   <project name="pershoot/android_vendor_samsung_p4wifi" path="vendor/samsung/p4wifi" remote="github" revision="jellybean" />
-  <project name="pershoot/android_vendor_samsung_p4vzw" path="vendor/samsung/p4vzw" remote="github" revision="ics" />
-  <project name="maplesci/android_device_samsung_p4" path="device/samsung/p4" remote="github" revision="ics" />
-  <project name="maplesci/android_device_samsung_p4vzw" path="device/samsung/p4vzw" remote="github" revision="ics" />
+  <project name="pershoot/android_vendor_samsung_p4vzw" path="vendor/samsung/p4vzw" remote="github" revision="jellybean" />
+  <project name="maplesci/android_device_samsung_p4" path="device/samsung/p4" remote="github" revision="jellybean" />
+  <project name="maplesci/android_device_samsung_p4vzw" path="device/samsung/p4vzw" remote="github" revision="jellybean" />
   <project name="maplesci/android_device_samsung_p4wifi" path="device/samsung/p4wifi" remote="github" revision="jellybean" />
   <project name="maplesci/android_device_samsung_p4-common" path="device/samsung/p4-common" remote="github" revision="jellybean" />
   <project name="maplesci/android_frameworks_base" path="frameworks/base" remote="github" revision="jellybean"/>
