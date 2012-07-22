@@ -51,7 +51,7 @@ fi
 
 if [ ! "$(cat $WORKDIR/.repo/manifests.git/FETCH_HEAD | grep android-4.1.1_r1)" ]; then
     echo -e "\n Initialazing Jelly Bean repo. Set your identity if necessary \n"
-    repo init -b android-4.1.1_r1
+    $REPO init -b android-4.1.1_r1
 fi
 
 ## Copy modified files ##
@@ -64,7 +64,7 @@ echo -e "\n"
 read -s -p "Sync repo now? (If this is the first sync, it will download around 9GiB) [Y/n]" -n 1 REPOUPDATE
 if [[ $REPOUPDATE =~ ^[Yy]$ ]]; then
     echo -e "\n\nSyncing repos..."
-    repo sync -j16
+    $REPO sync -j16
 fi
 echo -e "\n\n"
 ## Confirm compilation ##
