@@ -133,10 +133,6 @@ cd $OUTDIR
 unzip -q *.zip -d tmp/
 rm *.zip
 rm -rf tmp/recovery
-## Fix keyboard for p4
-if [ "${TARGET[$OPTION]}" == "p4" ]; then
-    echo ro.sf.lcd_density=160 >> tmp/system/build.prop
-fi
 sed -i s/"${TARGET[$OPTION]}"/"${MODELS[$OPTION]}"/ tmp/system/build.prop
 cp $SCRIPTDIR/cfgFiles/updater-script tmp/META-INF/com/google/android/
 sed -i s/p4wifi/"${TARGET[$OPTION]}"/ tmp/META-INF/com/google/android/updater-script
