@@ -57,7 +57,15 @@ fi
 ## Copy modified files ##
 cp $SCRIPTDIR/cfgFiles/local_manifest.xml $WORKDIR/.repo/
 cp $SCRIPTDIR/cfgFiles/kernel.mk  $WORKDIR/build/core/tasks/
-cp $SCRIPTDIR/cfgFiles/init.rc $WORKDIR/system/core/rootdir/
+#cp $SCRIPTDIR/cfgFiles/init.rc $WORKDIR/system/core/rootdir/
+
+## Comment original repos ##
+
+FRMW=`if ! grep '<project path="frameworks/base" name="platform/frameworks/base" />' $WORKDIR/.repo/manifest.xml | grep -q '<!--'; then sed -i 's/<project path="frameworks\/base" name="platform\/frameworks\/base" \/>/<!-- <project path="frameworks\/base" name="platform\/frameworks\/base" \/> -->/g' $WORKDIR/.repo/manifest.xml ; fi`
+
+STTG=`if ! grep '<project path="packages/apps/Settings" name="platform/packages/apps/Settings" />' $WORKDIR/.repo/manifest.xml | grep -q '<!--'; then sed -i 's/<project path="packages\/apps\/Settings" name="platform\/packages\/apps\/Settings" \/>/<!-- <project path="packages\/apps\/Settings" name="platform\/packages\/apps\/Settings" \/> -->/g' $WORKDIR/.repo/manifest.xml ; fi`
+
+SYSC=`if ! grep '<project path="system/core" name="platform/system/core" />' $WORKDIR/.repo/manifest.xml | grep -q '<!--'; then sed -i 's/<project path="system\/core" name="platform\/system\/core" \/>/<!-- <project path="system\/core" name="platform\/system\/core" \/> -->/g' $WORKDIR/.repo/manifest.xml ; fi`
 
 ## Confirm repo update ##
 echo -e "\n"
