@@ -57,7 +57,7 @@ fi
 ## Copy modified files ##
 cp $SCRIPTDIR/cfgFiles/local_manifest.xml $WORKDIR/.repo/
 cp $SCRIPTDIR/cfgFiles/kernel.mk  $WORKDIR/build/core/tasks/
-#cp $SCRIPTDIR/cfgFiles/init.rc $WORKDIR/system/core/rootdir/
+cp $SCRIPTDIR/cfgFiles/init.rc $WORKDIR/system/core/rootdir/
 
 ## Comment original repos ##
 
