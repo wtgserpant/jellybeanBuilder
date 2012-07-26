@@ -59,6 +59,11 @@ cp $SCRIPTDIR/cfgFiles/local_manifest.xml $WORKDIR/.repo/
 cp $SCRIPTDIR/cfgFiles/kernel.mk  $WORKDIR/build/core/tasks/
 cp $SCRIPTDIR/cfgFiles/init.rc $WORKDIR/system/core/rootdir/
 
+## Copy toolchain for building the kernel ##
+if [ ! -d $WORKDIR/prebuilt/linux-x86/toolchain/arm-2010.09 ]; then
+    cp -R $SCRIPTDIR/toolchain/arm-2010.09 $WORKDIR/prebuilt/linux-x86/toolchain/
+fi
+
 ## Comment original repos ##
 
 FRMW=`if ! grep '<project path="frameworks/base" name="platform/frameworks/base" />' $WORKDIR/.repo/manifest.xml | grep -q '<!--'; then sed -i 's/<project path="frameworks\/base" name="platform\/frameworks\/base" \/>/<!-- <project path="frameworks\/base" name="platform\/frameworks\/base" \/> -->/g' $WORKDIR/.repo/manifest.xml ; fi`
