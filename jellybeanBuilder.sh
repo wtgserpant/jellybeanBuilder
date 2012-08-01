@@ -72,6 +72,8 @@ STTG=`if ! grep '<project path="packages/apps/Settings" name="platform/packages/
 
 SYSC=`if ! grep '<project path="system/core" name="platform/system/core" />' $WORKDIR/.repo/manifest.xml | grep -q '<!--'; then sed -i 's/<project path="system\/core" name="platform\/system\/core" \/>/<!-- <project path="system\/core" name="platform\/system\/core" \/> -->/g' $WORKDIR/.repo/manifest.xml ; fi`
 
+HWRIL=`if ! grep '<project path="hardware/ril" name="platform/hardware/ril" />' $WORKDIR/.repo/manifest.xml | grep -q '<!--'; then sed -i 's/<project path="hardware\/ril" name="platform\/hardware\/ril" \/>/<!-- <project path="hardware\/ril" name="platform\/hardware\/ril" \/> -->/g' $WORKDIR/.repo/manifest.xml ; fi`
+
 ## Confirm repo update ##
 echo -e "\n"
 read -s -p "Sync repo now? (If this is the first sync, it will download around 9GiB) [Y/n]" -n 1 REPOUPDATE

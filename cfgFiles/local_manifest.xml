@@ -4,6 +4,7 @@
            fetch="git://github.com/" />
 
   <project name="CyanogenMod/android_system_core" path="system/core" remote="github" revision="jellybean" />
+  <project name="CyanogenMod/android_hardware_ril" path="hardware/ril" remote="github" revision="jellybean" />
   <project name="pershoot/galaxy-2636" path="kernel/samsung" remote="github" revision="jellybean" />
   <project name="pershoot/android_vendor_samsung_p4" path="vendor/samsung/p4" remote="github" revision="jellybean"/>
   <project name="pershoot/android_vendor_samsung_p4wifi" path="vendor/samsung/p4wifi" remote="github" revision="jellybean" />
