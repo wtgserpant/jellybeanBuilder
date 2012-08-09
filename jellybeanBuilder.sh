@@ -46,12 +46,12 @@ fi
 
 if [ ! -d $WORKDIR/.repo ]; then
     echo -e "\n Initialazing Jelly Bean repo. Set your identity if necessary \n"
-    $REPO init -u https://android.googlesource.com/platform/manifest -b android-4.1.1_r1
+    $REPO init -u https://android.googlesource.com/platform/manifest -b android-4.1.1_r4
 fi
 
-if [ ! "$(cat $WORKDIR/.repo/manifests.git/FETCH_HEAD | grep android-4.1.1_r1)" ]; then
+if [ ! "$(cat $WORKDIR/.repo/manifests.git/FETCH_HEAD | grep android-4.1.1_r4)" ]; then
     echo -e "\n Initialazing Jelly Bean repo. Set your identity if necessary \n"
-    $REPO init -b android-4.1.1_r1
+    $REPO init -b android-4.1.1_r4
 fi
 
 ## Copy modified files ##
