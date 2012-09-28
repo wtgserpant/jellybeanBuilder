@@ -1,7 +1,7 @@
 #!/bin/bash
 ## Set your work and out directories ##
-WORKDIR=~/development/androidJB
-OUTDIR=~/development/out
+WORKDIR=~/Android/development/androidJB
+OUTDIR=~/Android/development/out
 VERSION=jellybean-alpha
 
 ## Update script ##
@@ -106,8 +106,8 @@ echo -e "\n"
 lunch full_${TARGET[$OPTION]}-userdebug > /dev/null 2>&1
 
 ## Java exports, this can be adjusted to fit the system ##
-export JAVA_HOME=~/development/jdk1.6.0_27
-export PATH=$PATH:~/development/jdk1.6.0_27/bin
+export JAVA_HOME=~/usr/java/jdk1.6.0_27
+export PATH=$PATH:~/usr/java/jdk1.6.0_27/bin
 
 ## Start build ##
 
